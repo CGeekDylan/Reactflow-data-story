@@ -1,0 +1,40 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "@data-story/core#build": {
+      "outputs": ["dist"]
+    },
+    "@data-story/core#dev": {
+      "outputs": ["dist"]
+    },
+    "@data-story/ui#dev": {
+      "dependsOn": ["@data-story/ui#build"],
+      "outputs": ["dist"],
+      "cache": true,
+      "persistent": true
+    },
+    "@data-story/ui#build": {
+      "dependsOn": ["@data-story/core#build"],
+      "outputs": ["dist"]
+    },
+    "@data-story/client#dev": {
+      "dependsOn": [
+        "@data-story/ui#build"
+      ],
+      "outputs": [".next"]
+    },
+    "@data-story/docs#dev": {
+      "dependsOn": ["@data-story/ui#build"],
+      "outputs": [".next"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^dev"],
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {}
+  }
+}

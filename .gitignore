@@ -1,0 +1,9 @@
+node_modules
+.yarn
+.env
+.turbo
+
+notes
+notes.*
+
+private
